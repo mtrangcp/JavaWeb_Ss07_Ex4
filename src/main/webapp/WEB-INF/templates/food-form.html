@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm món ăn mới - RikkeiFood</title>
+    <style>
+        .error { color: red; font-style: italic; }
+        .form-group { margin-bottom: 15px; }
+        label { display: inline-block; width: 120px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center">Thêm món ăn mới</h2>
+
+    <p th:if="${error}" class="error" th:text="${error}"></p>
+
+    <form th:action="@{/ex4/add-food}" th:object="${food}" method="POST" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label>Tên món ăn:</label>
+            <input type="text" th:field="*{name}" required />
+        </div>
+
+        <div class="form-group">
+            <label>Danh mục:</label>
+            <select th:field="*{category}">
+                <option th:each="cat : ${categories}"
+                        th:value="${cat}"
+                        th:text="${cat}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Giá tiền:</label>
+            <input type="number" th:field="*{price}" />
+        </div>
+
+        <div class="form-group">
+            <label>Hình ảnh:</label>
+            <input type="file" name="image" accept="image/*" />
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>
